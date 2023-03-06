@@ -17,13 +17,13 @@ const Quiz = db.define('quiz', {
         type: Sequelize.STRING,
         allowNull: false
     },
-    categoryId:{
+    /*categoryId:{
         type: Sequelize.STRING,
         references:{
             model: categories,
             key:'id'
         }
-    },
+    },*/
     author:{
         type: Sequelize.STRING,
         allowNull: false
@@ -45,6 +45,5 @@ const Quiz = db.define('quiz', {
         allowNull: false
     },
 })
-
 
 module.exports = Quiz
