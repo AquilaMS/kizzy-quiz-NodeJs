@@ -1,7 +1,7 @@
 const authService = require('../service/Auth')
 
 const CreateUser = async (req, res)=>{
-    const exists = await authService.GetUserById(req.body);
+    const exists = await authService.GetUserByEmail(req.body);
     if(exists){return res.send({error:'Email already registered'})}
     else{
         const insertedUser = await authService.InsertInToDatabase(req.body)

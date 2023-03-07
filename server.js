@@ -1,12 +1,13 @@
 const express = require('express')
 const app = express()
-const quizRoute = require('./src/routes/Quiz')
 const db = require('./src/configs/db')
 const Quiz = require('./src/models/Quiz')
-const authRoute = require('./src/routes/Auth')
 const passportConfig = require('./src/configs/passport')()
-const userRoute = require('./src/routes/User')
 const passport = require('passport')
+
+const authRoute = require('./src/routes/Auth')
+const userRoute = require('./src/routes/User')
+const quizRoute = require('./src/routes/Quiz')
 
 app.use(express.json())
 app.use(passport.initialize())
@@ -20,6 +21,7 @@ app.get('/', async (req, res) => {
   }
 })
 
+app.use('/quiz', passportConfig.authenticate(),quizRoute)
 app.use('/teste', passportConfig.authenticate(), userRoute)
 app.use('/auth', authRoute)
 

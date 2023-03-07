@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const userController = require('../controllers/Quiz');
+const quizService = require('../controllers/Quiz');
 
+router.post('/add', quizService.AddQuiz)
 
-module.exports = router;
+module.exports = router; 

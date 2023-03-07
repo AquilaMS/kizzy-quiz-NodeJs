@@ -6,7 +6,11 @@ const SECRET = 'my super secret key'
 
 const GetUserById = async (user)=>{
     const users = await User.findOne({where:{id:user.id}})
-    //console.log(users)
+    return users
+}
+
+const GetUserByEmail = async (user)=>{
+    const users = await User.findOne({where:{email:user.email}})
     return users
 }
 
@@ -31,7 +35,7 @@ const CheckPassword = async (plainTextPwd, hashedPwd)=>{
 }
 
 const LoginUser = async (req, res)=>{
-    const exists = await GetUserById(req.body);
+    const exists = await GetUserByEmail(req.body);
     if(!exists){return {error:'User not found'}}
     else{
         const user = exists
@@ -50,5 +54,6 @@ module.exports = {
     GetUserById,
     InsertInToDatabase,
     CheckPassword,
-    LoginUser
+    LoginUser,
+    GetUserByEmail
 }

@@ -17,13 +17,9 @@ const Quiz = db.define('quiz', {
         type: Sequelize.STRING,
         allowNull: false
     },
-    /*categoryId:{
+    category:{
         type: Sequelize.STRING,
-        references:{
-            model: categories,
-            key:'id'
-        }
-    },*/
+    }, 
     author:{
         type: Sequelize.STRING,
         allowNull: false
