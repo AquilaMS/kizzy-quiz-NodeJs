@@ -1,4 +1,5 @@
 const Quiz = require('../models/Quiz')
+const Category = require('../models/Categories')
 
 const AddQuiz = async (user, quiz) =>{
     return Quiz.create({
@@ -15,6 +16,24 @@ const AddQuiz = async (user, quiz) =>{
     .catch(err => {return {error:err.errors[0].message}})
 } 
 
+const AutoCreate = async () => {
+    Category.bulkCreate([
+        { category: 'Art' },
+        { category: 'Sport' },
+        { category: 'Enterniment' },
+        { category: 'History' },
+        { category: 'Geograph' }
+    ])
+    .then(result =>{
+        return ''
+    })
+   .catch(err =>{
+        return ''
+   }) 
+   
+}
+
 module.exports = {
+    AutoCreate,
     AddQuiz
 }
