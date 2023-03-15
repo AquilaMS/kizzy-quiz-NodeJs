@@ -21,7 +21,14 @@ const User = db.define('user',{
         type: Sequelize.STRING,
         allowNull: false
     },
-
+    score:{
+        type: Sequelize.INTEGER,
+        default: 0
+    },
+    lifes:{
+        type: Sequelize.INTEGER,
+        default: 5
+    },
 })
 
 module.exports = User

@@ -1,5 +1,6 @@
 const Quiz = require('../models/Quiz')
 const Category = require('../models/Categories')
+const userService = require('../service/User')
 
 const AddQuiz = async (user, quiz) =>{
     return Quiz.create({
@@ -30,10 +31,28 @@ const AutoCreate = async () => {
    .catch(err =>{
         return ''
    }) 
-   
+}
+
+const findQuestion = async (id)=>{
+    const quiz = await Quiz.findOne({where:{id}})
+    return quiz.dataValues
+}
+
+const CheckIfRight = async(q, a, user) => {
+    const loggedUser = await userService.FindUser(user.id)
+    if(loggedUser.lifes -1 < 0 || loggedUser.lifes === null) return {error: 'Insuficient lifes'}
+    const foundQuestion = await findQuestion(q)
+
+    if(q == undefined || a == undefined) return {error: 'Empty'}
+    if(foundQuestion.answer === a) {
+        const dataUser = await userService.UpdateUserRightAnswer(user.id, loggedUser.score, loggedUser.lifes)
+        return true
+    }
+    else return false
 }
 
 module.exports = {
     AutoCreate,
-    AddQuiz
+    AddQuiz,
+    CheckIfRight,
 }

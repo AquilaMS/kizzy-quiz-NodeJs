@@ -11,7 +11,15 @@ const AutoCreate = async (req, res) => {
     return res.status(200).json()
 }
 
+const CheckIfRight = async (req, res) => {
+    const question = req.body.questionId  
+    const answer = req.body.answer
+    const response = await quizService.CheckIfRight(question, answer, req.user)
+    return res.status(200).json({response})
+}
+
 module.exports = {
     AddQuiz,
-    AutoCreate
+    AutoCreate,
+    CheckIfRight
 }
