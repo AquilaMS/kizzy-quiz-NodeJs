@@ -5,7 +5,7 @@ const GetName = async (req, res)=>{
     console.log()
     return res.status(200).json({username})
 }
- 
+
 module.exports = {
-    GetName
+    GetName,
 }

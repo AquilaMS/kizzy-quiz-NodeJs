@@ -2,6 +2,8 @@ const User = require('../models/User')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
+const userService = require('../service/User')
+
 const SECRET = 'my super secret key'
 
 const GetUserById = async (user)=>{
@@ -41,10 +43,12 @@ const LoginUser = async (req, res)=>{
         const user = exists
         const loggedUser = await CheckPassword(req.body.password, user.password)
         if (loggedUser == false) {return res.send({error:'Wrong password'})}
+
         const payload = {
             username: user.username,
             id: user.id
         }
+        await userService.UpdateLifes(user.id)
         const token = jwt.sign(payload, SECRET, {expiresIn: '10h'})      
         return {token: 'Bearer '+ token}
     }

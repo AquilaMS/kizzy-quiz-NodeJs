@@ -22,7 +22,7 @@ app.get('/', async (req, res) => {
 })
 
 app.use('/quiz', passportConfig.authenticate(),quizRoute)
-app.use('/teste', passportConfig.authenticate(), userRoute)
+app.use('/user', passportConfig.authenticate(), userRoute)
 app.use('/auth', authRoute)
 
 app.listen(3001)
